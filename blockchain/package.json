@@ -4,5 +4,8 @@
     "chai": "^4.4.1",
     "ethers": "^6.13.0",
     "hardhat": "^2.19.4"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
   }
 }
