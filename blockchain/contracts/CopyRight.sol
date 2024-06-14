@@ -10,7 +10,7 @@ contract CopyRight is Signer{
     struct ContractContents {
         RightType rightType;
         address author;
-        bytes contents;
+        string contents;
         string url;
         bytes32 contentsHash;
         uint256 updatedBlocknumber;
@@ -25,11 +25,11 @@ contract CopyRight is Signer{
     mapping (uint256 => ContractContents) public contractInfos;
     mapping (address => uint256[] ownedContractIds) public userContracts;
 
-    event Registerd(RightType rightType, uint256 indexed contractId, address indexed author, bytes contents, string url, bytes32 contentsHash, uint256 indexed updatedBlocknumber);
-    event Changed(RightType rightType, uint256 indexed contractId, address indexed author, bytes contents, string url, bytes32 contentsHash, uint256 indexed updatedBlocknumber);
+    event Registerd(RightType rightType, uint256 indexed contractId, address indexed author, string contents, string url, bytes32 contentsHash, uint256 indexed updatedBlocknumber);
+    event Changed(RightType rightType, uint256 indexed contractId, address indexed author, string contents, string url, bytes32 contentsHash, uint256 indexed updatedBlocknumber);
     constructor() Signer(msg.sender) {}
 
-    function register(RightType rightType,bytes memory contents, string memory url, bytes32 contentsHash) public {
+    function register(RightType rightType,string memory contents, string memory url, bytes32 contentsHash) public {
         ContractContents memory contractContents = ContractContents(rightType,msg.sender, contents, url, contentsHash, block.number);
         contractInfos[contractId] = contractContents;
         userContracts[msg.sender].push(contractId);
@@ -37,7 +37,7 @@ contract CopyRight is Signer{
         contractId++;
     }
 
-    function change(RightType rightType,bytes memory contents, string memory url, bytes32 contentsHash) public isSigner {
+    function change(RightType rightType,string memory contents, string memory url, bytes32 contentsHash) public isSigner {
         ContractContents memory contractContents = ContractContents(rightType,msg.sender, contents, url, contentsHash, block.number);
         contractInfos[contractId] = contractContents;
         userContracts[msg.sender].push(contractId);
@@ -45,7 +45,7 @@ contract CopyRight is Signer{
         contractId++;
     }
 
-    function getContractContents(uint256 _contractId) public view returns (RightType, address, bytes memory, string memory, bytes32, uint256) {
+    function getContractContents(uint256 _contractId) public view returns (RightType, address, string memory, string memory, bytes32, uint256) {
         ContractContents memory content = contractInfos[_contractId];
         return (content.rightType, content.author, content.contents, content.url, content.contentsHash, content.updatedBlocknumber);
     }
