@@ -50,7 +50,7 @@ contract CopyRight is Signer{
         return (content.rightType, content.author, content.contents, content.url, content.contentsHash, content.updatedBlocknumber);
     }
 
-    function decodeContents(bytes memory contents) public pure returns (string memory) {
-        return string(contents);
+    function checkContractIdByAddress(address _address) public view returns (uint256 [] memory) {
+        return userContracts[_address];
     }
 }
