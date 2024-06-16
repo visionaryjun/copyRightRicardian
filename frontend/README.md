@@ -1,29 +1,49 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](/packages/create-rainbowkit).
+## SmartContract Sequance diagram
 
-## Getting Started
+``` mermaid
+sequenceDiagram
+    participant User
+    participant Contract
+    participant NFTContract as NFT Contract
 
-First, run the development server:
+    User->>Contract: register(RightType, contents, url, contentsHash)
+    Contract-->>User: emit Registered event
 
-```bash
-npm run dev
+    User->>Contract: registerNft(_nftAddress, _nftId, _rightId)
+    Contract->>NFTContract: ownerOf(_nftId)
+    NFTContract-->>Contract: returns owner address
+    Contract-->>User: emit Registered event if owner
+    Contract-->>User: Error if not owner
+
+    User->>Contract: getContractContents(_contractId)
+    Contract-->>User: returns contract contents
+
+    User->>Contract: checkContractIdByAddress(_address)
+    Contract-->>User: returns contract IDs
+
+    User->>Contract: getRegisteredNfts(_rightId)
+    Contract-->>User: returns registered NFT addresses
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## flow chart
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+flowchart TD
+    A[User Registers Contract] -->|register| B{Is Author?}
+    B -- Yes --> C[Store Contract]
+    C --> D[Emit Registered Event]
+    B -- No --> E[Reject Registration]
 
-## Learn More
+    F[User Registers NFT] -->|registerNft| G{Is Author?}
+    G -- Yes --> H[Check NFT Ownership]
+    H --> I[NFT Contract: ownerOf]
+    I -->|Owner Matches| J[Store NFT Address]
+    J --> K[Emit Registered Event]
+    I -->|Owner Does Not Match| L[Reject NFT Registration]
 
-To learn more about this stack, take a look at the following resources:
+    M[User Queries Contract Contents] -->|getContractContents| N[Return Contract Contents]
+    O[User Queries Contract IDs] -->|checkContractIdByAddress| P[Return Contract IDs]
+    Q[User Queries Registered NFTs] -->|getRegisteredNfts| R[Return Registered NFT Addresses]
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
-
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
