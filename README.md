@@ -28,7 +28,7 @@ sequenceDiagram
 
 ## flow chart
 
-```
+``` mermaid
 flowchart TD
     A[User Registers Contract] -->|register| B{Is Author?}
     B -- Yes --> C[Store Contract]
