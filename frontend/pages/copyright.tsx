@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import styles from '../styles/Form.module.css';
-import { useRegisterCopyright } from '../hooks/transactions';
+import { useRegisterCopyright } from '../hooks/useRegisterCopyright';
 
 const Copyright = () => {
   const [isRegistered, setIsRegistered] = useState('');

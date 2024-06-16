@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
-import { GetDesignInfos, GetContractInfos, CheckContractIdByAddress } from '../hooks/transactions';
+import { GetContractInfos, CheckContractIdByAddress } from '../hooks/indexSearch';
 
 const Home: NextPage = () => {
   return (

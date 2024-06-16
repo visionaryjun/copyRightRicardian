@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import styles from '../styles/Form.module.css';
-import { useRegisterDesign } from '../hooks/transactions';
+import { useRegisterDesign } from '../hooks/useRegisterDesign';
 
 const Design = () => {
   const [legalStatus, setLegalStatus] = useState('');
