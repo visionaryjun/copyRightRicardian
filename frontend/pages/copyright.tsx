@@ -5,10 +5,15 @@ import { useRegisterCopyright } from '../hooks/useRegisterCopyright';
 
 const Copyright = () => {
   const [isRegistered, setIsRegistered] = useState('');
-  const registerCopyright  = useRegisterCopyright();
+  const [isDerivative, setIsDerivative] = useState('');
+  const registerCopyright = useRegisterCopyright();
 
   const handleIsRegisteredChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsRegistered(event.target.value);
+  };
+
+  const handleIsDerivativeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsDerivative(event.target.value);
   };
 
   return (
@@ -26,18 +31,18 @@ const Copyright = () => {
         <div className={styles.formGroup}>
           <label>Classification (저작물 구분):</label>
           <div>
-            <label><input type="radio" name="classification" value="일반 저작물" required /> 일반 저작물</label>
-            <label><input type="radio" name="classification" value="업무상 저작물" required /> 업무상 저작물</label>
-            <label><input type="radio" name="classification" value="공동 저작물" required /> 공동 저작물</label>
+            <label><input type="radio" name="classification" value="일반 저작물" /> 일반 저작물</label>
+            <label><input type="radio" name="classification" value="업무상 저작물" /> 업무상 저작물</label>
+            <label><input type="radio" name="classification" value="공동 저작물" /> 공동 저작물</label>
           </div>
         </div>
         <div className={styles.formGroup}>
           <label>Author Type (저작자 구분):</label>
           <div>
-            <label><input type="radio" name="authorType" value="개인 저작" required /> 개인 저작</label>
-            <label><input type="radio" name="authorType" value="업무상 저작" required /> 업무상 저작</label>
-            <label><input type="radio" name="authorType" value="공동 저작" required /> 공동 저작</label>
-            <label><input type="radio" name="authorType" value="저작인접자" required /> 저작인접자</label>
+            <label><input type="radio" name="authorType" value="개인 저작" /> 개인 저작</label>
+            <label><input type="radio" name="authorType" value="업무상 저작" /> 업무상 저작</label>
+            <label><input type="radio" name="authorType" value="공동 저작" /> 공동 저작</label>
+            <label><input type="radio" name="authorType" value="저작인접자" /> 저작인접자</label>
           </div>
         </div>
         <div className={styles.formGroup}>
@@ -59,22 +64,44 @@ const Copyright = () => {
         <div className={styles.formGroup}>
           <label>Is Derivative (2차적 저작물 여부):</label>
           <div>
-            <label><input type="radio" name="isDerivative" value="Yes" required /> Yes</label>
-            <label><input type="radio" name="isDerivative" value="No" required /> No</label>
+            <label>
+              <input 
+                type="radio" 
+                name="isDerivative" 
+                value="Yes" 
+                onChange={handleIsDerivativeChange} 
+                required
+              /> Yes
+            </label>
+            <label>
+              <input 
+                type="radio" 
+                name="isDerivative" 
+                value="No" 
+                onChange={handleIsDerivativeChange} 
+                required
+              /> No
+            </label>
           </div>
         </div>
-        <div className={styles.formGroup}>
-          <label>Original Author Name (원저작물 저작자 성명):</label>
-          <input type="text" name="originalAuthorName" />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Original Title (원저작물 제목):</label>
-          <input type="text" name="originalTitle" />
-        </div>
-        <div className={styles.formGroup}>
-          <label>Email (전자우편주소):</label>
-          <input type="email" name="email" required />
-        </div>
+
+        {isDerivative === 'Yes' && (
+          <>
+            <div className={styles.formGroup}>
+              <label>Original Author Name (원저작물 저작자 성명):</label>
+              <input type="text" name="originalAuthorName" />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Original Title (원저작물 제목):</label>
+              <input type="text" name="originalTitle" />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Email (전자우편주소):</label>
+              <input type="email" name="email" />
+            </div>
+          </>
+        )}
+
         <div className={styles.formGroup}>
           <label>Is Copyright Registered (저작권 기등록여부):</label>
           <div>
@@ -84,7 +111,6 @@ const Copyright = () => {
                 name="isRegistered" 
                 value="Yes" 
                 onChange={handleIsRegisteredChange} 
-                required 
               /> Yes
             </label>
             <label>
@@ -93,12 +119,11 @@ const Copyright = () => {
                 name="isRegistered" 
                 value="No" 
                 onChange={handleIsRegisteredChange} 
-                required
               /> No
             </label>
           </div>
         </div>
-        
+
         {isRegistered === 'Yes' && (
           <>
             <div className={styles.formGroup}>
