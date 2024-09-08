@@ -51,7 +51,7 @@ export function useRegisterCopyright() {
     const metadataString = JSON.stringify(metadataOfCopyright);
     console.log("metadataString >>", metadataString);
     const rightType = 0; // this is from enum RightType in smart contract
-    const url = "저작권의 실제 자료가 들어간 url"; //write uploaded link
+    const url = "uploaded link url"; //write uploaded link
     const hashValue = "0x2c26b46b68ffc68ff99b453c1d30413413422b9926c2a8b9922c97d4c2e1f0b9"; //make hash from url contents
 
     try {

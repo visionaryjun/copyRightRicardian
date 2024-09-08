@@ -52,7 +52,7 @@ export function CheckContractIdByAddress() {
     if (!data) {
       return (
         <div>
-          <p><strong>해당 사용자는 저작권을 등록하지 않았습니다.</strong></p>
+          <p><strong>The user hasn't registered a copyright.</strong></p>
         </div>
       );
     }
@@ -60,17 +60,17 @@ export function CheckContractIdByAddress() {
     if (Array.isArray(data) && data.length === 0) {
       return (
         <div>
-          <p><strong>해당 사용자는 저작권을 등록하지 있지 않습니다.</strong></p>
+          <p><strong>The user hasn't registered a copyright.</strong></p>
         </div>
       );
     }
 
     return (
       <div>
-        <h3>해당 사용자가 보유한 저작권 번호</h3>
+        <h3>The copyright number held by that user</h3>
         <div>
           {data.map((contractId: any, index: number) => (
-            <p key={index}><strong> 저작권 번호:</strong> {contractId.toString()}</p>
+            <p key={index}><strong>Copyright number:</strong> {contractId.toString()}</p>
           ))}
         </div>
       </div>
@@ -88,7 +88,7 @@ export function CheckContractIdByAddress() {
       <button
         onClick={handleReadData}
         className={styles.submitButton}
-      > 지갑주소로 보유한 저작권 찾기 📤
+      > Find the copyrights you own by wallet address 📤
       </button>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error fetching data. Please try again.</p>}

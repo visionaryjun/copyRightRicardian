@@ -41,7 +41,7 @@ export function useRegisterDesign() {
     const metadataString = JSON.stringify(metadataOfDesign);
     console.log("metadataString >>", metadataString);
     const rightType = 1; // this is from enum RightType in smart contract
-    const url = "디자인의 실제 도면이 들어간 url"; //write uploaded link
+    const url = "Design Model url"; //write uploaded link
     const hashValue = "0x2c26b46b68ffc68ff99b453c1d30413413422b9926c2a8b9922c97d4c2e1f0b9"; //make hash from url contents
 
     try {
